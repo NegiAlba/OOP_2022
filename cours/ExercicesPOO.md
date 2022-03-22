@@ -26,3 +26,15 @@ Après la création, la modification. Créez les méthodes accesseurs et modific
 ### Exercice 6
 
 Créez une méthode qui prendra le type de votre objet maison et le transformera en un nom avec une majuscule en premier caractère.
+
+## BONUS : Utilisez vos recherches
+
+Créez une BDD immobilier et une table maison qui correspond aux propriétés de notre classe maison.
+
+Créez une classe DB qui va réaliser une connexion à une base de données et qui pourra servir afin de réaliser des requête SQL sur les objets.
+
+Après avoir créé cette classe. Créez une méthode dans la classe Maison qui permette de récupérer tous les objets qui auront été créées avec PHPMyAdmin dans notre application.
+
+Déclinez cette méthode afin de pouvoir récupérer un seul élément en fonction de son ID.
+
+Réalisez la requête d'insertion aussi.
