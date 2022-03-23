@@ -11,7 +11,7 @@ abstract class DAO
 {
     protected static \PDO $dao;
 
-    public function __construct(string $config = 'mysql:host=localhost;dbname=oopzoo;', string $user = 'root', string $password = '')
+    private function __construct(string $config = 'mysql:host=localhost;dbname=oopzoo;', string $user = 'root', string $password = '')
     {
         // ? Avec self:: Il appellera forcément la valeur qui est définie dan sla classe parent
         // ? Avec static, il utilisera la valeur la plus récemment déclarée (en l'occurence l'enfant)
@@ -24,8 +24,17 @@ abstract class DAO
         }
     }
 
+    protected function __clone()
+    {
+    }
+
     public function getStaticDao(): PDO
     {
+        // ? Vérifier si le DAO est initalisé, lancer constructor si non, sinon retourner la prop static dao
+        if (!static::$dao) {
+            DAO::__construct();
+        }
+
         return static::$dao;
     }
 
