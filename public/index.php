@@ -15,15 +15,25 @@ declare(strict_types=1);
         // 2. On va remplacer 'App' par 'src' dans le nom de classe et concaténer le retour au dossier parent et l'extension php
         // ? ../src/Zoo/Animal.php
 
-        require $path;
+        if (file_exists($path)) {
+            require $path;
+        }
     });
 
-    echo 'Hello World!';
+    $router = new App\Router();
+
+    $router->register('/', function () {
+        echo 'This is the homepage';
+    });
+
+    $router->register('/about', function () {
+        echo 'About page';
+    });
+
+    echo $router->resolve($_SERVER['REQUEST_URI']);
 
     echo '<br>';
 
-    // echo '<pre>';
-    // print_r($_SERVER['REQUEST_URI']);
-    // echo '</pre>';
-
-    $zooChat = new App\Zoo\Animal('Lion', 4);
+    echo '<pre>';
+    print_r($_SERVER);
+    echo '</pre>';
