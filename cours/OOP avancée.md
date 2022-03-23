@@ -28,3 +28,39 @@ Comment gérer l'autoloading de classes que j'aurais installé en dépendances d
 Composer permet de générer un autoloader performant, qui peut non seulement charger automatiquement les classes des dépendances mais aussi celle que j'aurais crée par moi même.
 
 ## Classes abstraites
+
+Une classe abstraite est une classe qui ne peut pas être étendue et dont l'objectif réside dans le fait de créer des classes enfants qui vont hériter de ses propriétés et de ses méthodes.
+Les classes abstraites servent de schémas à leur enfants et permettent de diriger leurs comportements.
+
+Pour créer une classe abstraite il suffit de créer une classe et de la préfixer avec abstract
+
+```php
+abstract class Maison
+{
+}
+```
+
+On peut aussi créer des méthodes abstraites, qui doivent forcément être définies par les classes enfants afin de préciser une fonctionnalité qui doit être customisée mais qui doit exister nécessairement.
+
+## Propriétés et méthodes statiques
+
+Il arrive parfois que nous ayons besoin d'une seule instance d'une classe afin de gérer du contenu sur une page. Toutefois cette instance n'est pas nécessairement garantie être unique et c'est là qu'intervient le mot clé `static`.
+Une propriété statique ne peut exister qu'en un seul exemplaire et sera partagé entre toutes instances de la classe possédant cette propriété statique.
+Une propriété statique se déclare avec le mot clé **static** et est appelée avec l'opérateur de résolution de portée (ou Paamayim Nekutodayim ) **::**.
+
+```php
+class Animal
+{
+    private static $staticProp;
+    echo Animal::$staticProp;
+}
+```
+
+## Les DAO ou Data Access Objects
+
+Les DAO sont des classes qui servent à réaliser des transactions sur les objets.
+Il ne doit y avoir qu'un seul DAO par classe à gérer.
+De manière générale on utilise aussi une classe **abstraite** DAO qui va contenir les informations partagées entre les classes DAO (notamment la connexion à la BDD, ou le créateur de requêtes)
+
+C'est dans ces DAO que l'on retrouve généralement le CRUD des objets.
+Chaque méthode représente une des transactions acceptables sur les objets, elles seront donc créées en fonction du besoin de l'application

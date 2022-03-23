@@ -25,8 +25,9 @@
   - .htaccess pour PHP POO
 - Namespaces en PHP
 - Autoloading en PHP
+- Router en POO pour architecture
 - Mise en place d'une architecture propre à la POO
   - src
   - public
   - views
-  - DAO
+  - DAO : Création de connexion à la BDD, création d'un gestionnaire de requêtes et réalisation d'une requête SELECT

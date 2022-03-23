@@ -2,7 +2,9 @@
 
 declare(strict_types=1);
 
-    spl_autoload_register(function ($class) {
+use App\DAO\AnimalDAO;
+
+spl_autoload_register(function ($class) {
         // ! Nom de la classe
         // ? App\Zoo\Animal
         // Il faudra transformer le nom de la classe afin qu'il corresponde à un chemin qu'on puisse require
@@ -21,14 +23,14 @@ declare(strict_types=1);
     });
 
     $router = new App\Router();
-
-    $router->register('/', function () {
-        echo 'This is the homepage';
-    });
-
-    $router->register('/about', function () {
-        echo 'About page';
-    });
+    $router->register('/', function () { include '../views/homepage.php'; })
+           ->register('/about', function () { var_dump($_POST); })
+           ->register('/animals', function () {
+               $animalDAO = new AnimalDAO();
+               echo '<pre>';
+               print_r($animalDAO->getAnimals());
+               echo '</pre>';
+           });
 
     echo $router->resolve($_SERVER['REQUEST_URI']);
 
