@@ -3,6 +3,7 @@
 declare(strict_types=1);
 
 use App\DAO\AnimalDAO;
+use App\Zoo\Animal;
 
 spl_autoload_register(function ($class) {
     // ! Nom de la classe
@@ -22,20 +23,20 @@ spl_autoload_register(function ($class) {
     }
 });
 
+$root = dirname(__DIR__).DIRECTORY_SEPARATOR;
+define('VIEWS_PATH', $root.'views'.DIRECTORY_SEPARATOR);
+
     $router = new App\Router();
-    $router->register('/', function () { include '../views/homepage.php'; })
-           ->register('/about', function () { var_dump($_POST); })
-           ->register('/animals', function () {
+    $router->get('/', function () { include '../views/homepage.php'; })
+           ->get('/alt', [App\Controllers\HomeController::class, 'index'])
+           ->post('/', [App\Controllers\HomeController::class, 'form'])
+           ->register('get', '/animals', function () {
                $animalDAO = new AnimalDAO();
                echo '<pre>';
                print_r($animalDAO->getAnimals());
                echo '</pre>';
+           })
+           ->register('get', '/oiseau', function () {
            });
 
-    echo $router->resolve($_SERVER['REQUEST_URI']);
-
-    echo '<br>';
-
-    echo '<pre>';
-    print_r($_SERVER);
-    echo '</pre>';
+    echo $router->resolve($_SERVER['REQUEST_URI'], strtolower($_SERVER['REQUEST_METHOD']));

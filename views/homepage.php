@@ -12,12 +12,18 @@
     <h1>C'est la page d'accueil</h1>
     <p>Ici on peut faire tout le traitement qu'il y aurait sur une page d'accueil normale</p>
 
-    <form action="/about" method="POST">
+    <form action="/" method="POST">
         <input type="text" name="test">
         <button type="submit">Envoyer</button>
     </form>
 
-    <a href="/about">Aller à la page about</a>
+    <a href="/form">Aller à la page form</a>
+
+    <?php
+        echo '<pre>';
+        var_dump($this->form);
+        echo '</pre>';
+    ?>
 </body>
 
 </html>
